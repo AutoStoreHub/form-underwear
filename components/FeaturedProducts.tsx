@@ -3,7 +3,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, ShieldCheck, CheckCircle } from "@phosphor-icons/react";
+import Image from "next/image";
+import { ArrowUpRight, CheckCircle } from "@phosphor-icons/react";
 import { useCart } from "@/context/CartContext";
 import { PRODUCTS } from "@/lib/products";
 
@@ -48,56 +49,18 @@ function ProductRow({
     >
       {/* Visual panel */}
       <div
-        className={`relative overflow-hidden aspect-[4/5] flex items-center justify-center ${
-          reversed ? "md:order-2" : ""
-        }`}
-        style={{
-          background: `linear-gradient(145deg, ${product.cardGradient[0]} 0%, ${product.cardGradient[1]} 100%)`,
-        }}
+        className={`relative overflow-hidden aspect-[4/5] ${reversed ? "md:order-2" : ""}`}
+        style={{ background: `linear-gradient(145deg, ${product.cardGradient[0]} 0%, ${product.cardGradient[1]} 100%)` }}
       >
-        {/* Dot texture */}
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px)",
-            backgroundSize: "22px 22px",
-          }}
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover"
         />
-
-        {/* Brand watermark */}
-        <p
-          className="absolute select-none pointer-events-none font-black text-white/6 tracking-widest uppercase"
-          style={{ fontSize: "clamp(5rem, 14vw, 10rem)", letterSpacing: "-0.02em" }}
-        >
-          {product.brand}
-        </p>
-
-        {/* Center content */}
-        <div className="relative z-10 text-center px-8">
-          <p className="text-white/50 text-xs tracking-[0.2em] uppercase font-medium mb-3">
-            {product.brand}
-          </p>
-          <p className="text-white text-2xl md:text-3xl font-bold tracking-tight mb-4">
-            {product.name}
-          </p>
-          <p className="text-white/60 text-sm italic mb-6">{product.brandTagline}</p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {product.certifications.slice(0, 2).map((cert) => (
-              <span
-                key={cert}
-                className="inline-flex items-center gap-1 text-[0.6rem] text-white/60 bg-white/10 border border-white/10 rounded-full px-2.5 py-1"
-              >
-                <ShieldCheck size={9} weight="fill" />
-                {cert}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Tag */}
         {product.tag && (
-          <span className="absolute top-5 left-5 text-[0.65rem] tracking-[0.15em] uppercase font-semibold bg-canvas/90 text-accent px-3 py-1.5 rounded-full">
+          <span className="absolute top-5 left-5 z-10 text-[0.65rem] tracking-[0.15em] uppercase font-semibold bg-canvas/90 text-accent px-3 py-1.5 rounded-full">
             {product.tag}
           </span>
         )}

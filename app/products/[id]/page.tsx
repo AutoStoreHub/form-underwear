@@ -3,6 +3,7 @@
 import { notFound } from "next/navigation";
 import { useState, use } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ShieldCheck, ArrowLeft, Plus, Minus, ShoppingBag, CheckCircle } from "@phosphor-icons/react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -15,6 +16,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   if (!rawProduct) return notFound();
   const product = rawProduct;
 
+  const [activeImg, setActiveImg] = useState(0);
   const [selectedColorIdx, setSelectedColorIdx] = useState(0);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2] ?? product.sizes[0]);
   const [qty, setQty] = useState(1);
@@ -68,59 +70,42 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
         <div className="max-w-7xl mx-auto px-6 md:px-10 py-10 md:py-16 grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-10 md:gap-20">
           {/* Left: visual */}
           <div className="sticky top-24 self-start">
+            {/* Main image */}
             <div
-              className="relative overflow-hidden rounded-2xl aspect-square"
-              style={{
-                background: `linear-gradient(145deg, ${product.cardGradient[0]} 0%, ${product.cardGradient[1]} 100%)`,
-              }}
+              className="relative overflow-hidden rounded-2xl aspect-square mb-3"
+              style={{ background: `linear-gradient(145deg, ${product.cardGradient[0]} 0%, ${product.cardGradient[1]} 100%)` }}
             >
-              {/* Dot texture */}
-              <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px)",
-                  backgroundSize: "24px 24px",
-                }}
+              <Image
+                src={product.images[activeImg]}
+                alt={product.name}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+                priority
               />
-
-              {/* Brand name watermark */}
-              <p
-                className="absolute inset-0 flex items-center justify-center select-none pointer-events-none font-black text-white/8 tracking-widest uppercase"
-                style={{ fontSize: "clamp(4rem, 12vw, 8rem)" }}
-              >
-                {product.brand}
-              </p>
-
-              {/* Center content */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 text-center px-8">
-                <p className="text-white/50 text-xs tracking-[0.2em] uppercase font-medium">
-                  {product.brand}
-                </p>
-                <p className="text-white text-3xl md:text-4xl font-bold tracking-tight leading-tight">
-                  {product.name}
-                </p>
-                <p className="text-white/60 text-sm italic">{product.brandTagline}</p>
-                <div className="flex flex-wrap justify-center gap-2 mt-2">
-                  {product.certifications.slice(0, 2).map((cert) => (
-                    <span
-                      key={cert}
-                      className="inline-flex items-center gap-1.5 text-[0.65rem] text-white/70 bg-white/10 border border-white/15 rounded-full px-3 py-1.5"
-                    >
-                      <ShieldCheck size={11} weight="fill" />
-                      {cert}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Tag */}
               {product.tag && (
-                <span className="absolute top-4 left-4 text-[0.65rem] tracking-[0.15em] uppercase font-semibold bg-canvas/90 text-accent px-3 py-1.5 rounded-full backdrop-blur-sm">
+                <span className="absolute top-4 left-4 z-10 text-[0.65rem] tracking-[0.15em] uppercase font-semibold bg-canvas/90 text-accent px-3 py-1.5 rounded-full">
                   {product.tag}
                 </span>
               )}
             </div>
+
+            {/* Thumbnails */}
+            {product.images.length > 1 && (
+              <div className="flex gap-2">
+                {product.images.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveImg(i)}
+                    className={`relative w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 transition-all cursor-pointer ${
+                      activeImg === i ? "ring-2 ring-accent ring-offset-2" : "opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    <Image src={img} alt={`${product.name} view ${i + 1}`} fill className="object-cover" sizes="64px" />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Right: info */}

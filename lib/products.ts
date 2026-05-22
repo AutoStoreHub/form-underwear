@@ -15,7 +15,9 @@ export interface Product {
   healthBenefits: string[];
   description: string;
   colors: { name: string; hex: string }[];
-  cardGradient: [string, string]; // [from, to]
+  cardGradient: [string, string];
+  image: string;
+  images: string[];
   sizes: string[];
   tag?: string;
   isNew: boolean;
@@ -49,6 +51,8 @@ export const PRODUCTS: Product[] = [
       { name: "Clay", hex: "#c07a5a" },
     ],
     cardGradient: ["#2a2724", "#c4663a"],
+    image: "https://images.pexels.com/photos/7479438/pexels-photo-7479438.jpeg?auto=compress&cs=tinysrgb&w=800",
+    images: ["https://images.pexels.com/photos/7479438/pexels-photo-7479438.jpeg?auto=compress&cs=tinysrgb&w=800", "https://images.pexels.com/photos/11010392/pexels-photo-11010392.jpeg?auto=compress&cs=tinysrgb&w=800"],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
     tag: "Health pick",
     isNew: false,
@@ -78,6 +82,8 @@ export const PRODUCTS: Product[] = [
       { name: "Blush", hex: "#d4a89e" },
     ],
     cardGradient: ["#1e1b18", "#8a5a3a"],
+    image: "https://images.pexels.com/photos/12458078/pexels-photo-12458078.jpeg?auto=compress&cs=tinysrgb&w=800",
+    images: ["https://images.pexels.com/photos/12458078/pexels-photo-12458078.jpeg?auto=compress&cs=tinysrgb&w=800", "https://images.pexels.com/photos/6879815/pexels-photo-6879815.jpeg?auto=compress&cs=tinysrgb&w=800"],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
     isNew: true,
     tag: "New",
@@ -107,6 +113,8 @@ export const PRODUCTS: Product[] = [
       { name: "Natural", hex: "#e8dcc8" },
     ],
     cardGradient: ["#1c3a2a", "#4a8a5a"],
+    image: "https://images.pexels.com/photos/11010392/pexels-photo-11010392.jpeg?auto=compress&cs=tinysrgb&w=800",
+    images: ["https://images.pexels.com/photos/11010392/pexels-photo-11010392.jpeg?auto=compress&cs=tinysrgb&w=800", "https://images.pexels.com/photos/7232397/pexels-photo-7232397.jpeg?auto=compress&cs=tinysrgb&w=800"],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
     tag: "Bestseller",
     isNew: false,
@@ -136,6 +144,8 @@ export const PRODUCTS: Product[] = [
       { name: "Storm", hex: "#8892a4" },
     ],
     cardGradient: ["#1a2a3a", "#3a6a8a"],
+    image: "https://images.pexels.com/photos/6879815/pexels-photo-6879815.jpeg?auto=compress&cs=tinysrgb&w=800",
+    images: ["https://images.pexels.com/photos/6879815/pexels-photo-6879815.jpeg?auto=compress&cs=tinysrgb&w=800", "https://images.pexels.com/photos/7479438/pexels-photo-7479438.jpeg?auto=compress&cs=tinysrgb&w=800"],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
     isNew: false,
     affiliateUrl: "#",
@@ -164,6 +174,8 @@ export const PRODUCTS: Product[] = [
       { name: "Charcoal", hex: "#3a3a3a" },
     ],
     cardGradient: ["#1a1e2a", "#2a4a8a"],
+    image: "https://images.pexels.com/photos/5175669/pexels-photo-5175669.jpeg?auto=compress&cs=tinysrgb&w=800",
+    images: ["https://images.pexels.com/photos/5175669/pexels-photo-5175669.jpeg?auto=compress&cs=tinysrgb&w=800", "https://images.pexels.com/photos/8874933/pexels-photo-8874933.jpeg?auto=compress&cs=tinysrgb&w=800"],
     sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
     tag: "Best value",
     isNew: false,
@@ -199,6 +211,8 @@ export const PRODUCTS: Product[] = [
       { name: "Sage", hex: "#8aab8a" },
     ],
     cardGradient: ["#2a1e14", "#8a6a3a"],
+    image: "https://images.pexels.com/photos/7479438/pexels-photo-7479438.jpeg?auto=compress&cs=tinysrgb&w=800",
+    images: ["https://images.pexels.com/photos/7479438/pexels-photo-7479438.jpeg?auto=compress&cs=tinysrgb&w=800", "https://images.pexels.com/photos/5908326/pexels-photo-5908326.jpeg?auto=compress&cs=tinysrgb&w=800"],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
     tag: "Doctor recommended",
     isNew: false,
@@ -233,6 +247,8 @@ export const PRODUCTS: Product[] = [
       { name: "Forest", hex: "#3a5a3a" },
     ],
     cardGradient: ["#1e2a1a", "#4a6a2a"],
+    image: "https://images.pexels.com/photos/7232397/pexels-photo-7232397.jpeg?auto=compress&cs=tinysrgb&w=800",
+    images: ["https://images.pexels.com/photos/7232397/pexels-photo-7232397.jpeg?auto=compress&cs=tinysrgb&w=800", "https://images.pexels.com/photos/5908326/pexels-photo-5908326.jpeg?auto=compress&cs=tinysrgb&w=800"],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
     isNew: true,
     tag: "New",
@@ -257,6 +273,8 @@ export const PRODUCTS: Product[] = [
       "Three Boody Full Briefs in your three favourite colours. A full hypoallergenic bamboo foundation in one box — naturally soft, breathable, and certified clean from harvest to finished garment.",
     colors: [{ name: "3 colours of your choice", hex: "" }],
     cardGradient: ["#1c3a2a", "#3a7a4a"],
+    image: "https://images.pexels.com/photos/6568223/pexels-photo-6568223.jpeg?auto=compress&cs=tinysrgb&w=800",
+    images: ["https://images.pexels.com/photos/6568223/pexels-photo-6568223.jpeg?auto=compress&cs=tinysrgb&w=800", "https://images.pexels.com/photos/9356539/pexels-photo-9356539.jpeg?auto=compress&cs=tinysrgb&w=800"],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
     tag: "Save 6%",
     isNew: false,
