@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ShopClient } from "@/components/ShopClient";
@@ -23,7 +24,9 @@ export default function ShopPage() {
           </h1>
         </div>
 
-        <ShopClient />
+        <Suspense>
+          <ShopClient />
+        </Suspense>
       </main>
       <Footer />
     </>
